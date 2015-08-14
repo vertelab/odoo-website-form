@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <!-- User Navbar -->
+    <template id="content_new_blogpost" inherit_id="website.user_navbar" groups="base.group_document_user">
+      <xpath expr="//ul[@id='oe_systray']/li/ul[@class='dropdown-menu oe_content_menu']" position="inside">
+        <li>
+          <a href="#" data-action="new_form_post">New Form</a>
+        </li>
+      </xpath>
+    </template>
+    <template id="assets_editor" inherit_id="website.assets_editor" name="Form Editor" groups="base.group_website_publisher">
+      <xpath expr="." position="inside">
+        <script type="text/javascript" src="/website_form/static/js/website_form.editor.js" />
+      </xpath>
+    </template>
+    
+    
+    <template id="form" name="Form">
+      <t t-call="website.layout">
+        <div id="wrap">
+          <t t-raw="0" />
+          <div class="oe_structure oe_empty" />
+          <t t-raw="form.body"/>
+        </div>
+      </t>
+    </template>
+    
+    
+    <template id="edit" name="Edit Form">
+      <t t-call="website.layout">
+        <div id="wrap">
+          <form class="form-horizontal" method="POST">
+            <fieldset>
+              <!-- Form Name -->
+              <h1 class="col-md-12">Edit Form</h1>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Title</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="form.name" type="text" placeholder="name" class="form-control input-md" t-att-value="form.name" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Title</label>
+                <div class="col-md-4">
+                  <input id="check1" name="checkbox_1" type="checkbox" class="form-control input-md" t-att-value="form.name" />
+                  <input id="check2" name="checkbox_2" type="checkbox" class="form-control input-md" t-att-value="form.name" />
+                  <input id="check3" name="checkbox_3" type="checkbox" class="form-control input-md" t-att-value="form.name" />
+                  <input id="check4" name="checkbox_4" type="checkbox" class="form-control input-md" t-att-value="form.name" />
+                  <input id="check5" name="checkbox_5" type="checkbox" class="form-control input-md" t-att-value="form.name" />
+                </div>
+              </div>
+
+
+
+              <!-- Textarea -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textarea">Form code</label>
+                <div class="col-md-4">
+                  <textarea class="form-control" id="textarea" name="form.body"><t t-raw="form.body"/></textarea>  
+                </div>
+              </div>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton" />
+                <div class="col-md-4">
+                  <input name="Send" value="Save" class="btn btn-primary" type="submit"/>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </t>
+    </template>
+  </data>
+</openerp>
