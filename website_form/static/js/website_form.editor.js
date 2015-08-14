@@ -22,6 +22,10 @@ $(document).ready(function() {
                     $pre.find('label').prepend(_t("Form Title:"));
                     $group.before($pre);
                     var $add = $(
+                     '<div class="form-group ">'+
+                            '<label class="col-sm-3 control-label" for="thanks_template""/>'+
+                            '<div class="col-sm-9"><input type="text" id="thanks_template" name="thanks_template" value="website_form.thanks" /></div> '+
+                            + '</div>'
                         '<div class="form-group mb0">'+
                             '<label class="col-sm-offset-3 col-sm-9 text-left">'+
                             '    <input type="checkbox" checked="checked" required="required"/> '+
@@ -36,17 +40,14 @@ $(document).ready(function() {
                 
                 
              }).then(function (val,field,$dialog) {
-                console.log(val,field);
+                console.log('val:',val,'field:',field,'dialog:',$dialog);
                 if (val) {
                     var title = $dialog.find('input[name="form_name"]');
                     console.log(title);
-                    console.log(title.val);
-                    console.log(title.val.text);
-                    console.log(title.value);
-                    
-                    var url = '/form/' + encodeURIComponent(title) + '/add?model_id=' + val;
-                 X
+                    console.log(title.val());
+                    var url = '/form/' + encodeURIComponent(title.val()) + '/add?model_id=' + val;
                     if ($dialog.find('input[type="checkbox"]').is(':checked')) url +="&add_menu=1";
+                    if ($dialog.find('input[name="thanks_template"]').val()) url +="&thanks_template=%s" % $dialog.find('input[name="thanks_template"]').val();
                     document.location = url;
                 }
             });

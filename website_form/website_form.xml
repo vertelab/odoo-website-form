@@ -26,7 +26,6 @@
       </t>
     </template>
     
-    
     <template id="edit" name="Edit Form">
       <t t-call="website.layout">
         <div id="wrap">
