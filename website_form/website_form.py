@@ -32,7 +32,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class website_form(http.Controller):
-        
+
     @http.route(['/form/<string:form>/add', ], type='http', auth="user", website=True)
     def form_add(self, form=False,model_id=False,add_menu=0, thanks_template='website_form.thanks',**post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
@@ -41,7 +41,7 @@ class website_form(http.Controller):
         _logger.warning("This is form postnr %s" % (form))
 
 
-               
+
         if add_menu:
             model, id  = request.registry["ir.model.data"].get_object_reference(request.cr, request.uid, 'website', 'main_menu')
             request.registry['website.menu'].create(request.cr, request.uid, {
@@ -49,15 +49,15 @@ class website_form(http.Controller):
                     'url': "/form/" + form.name,
                     'parent_id': id,
                 }, context=request.context)
-        
+
         return werkzeug.utils.redirect("/form/"+form.name)
-        
+
     @http.route(['/form/<string:form>', ], type='http', auth="public", website=True)
     def form_view(self, form=False,**post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name','=', form)])
         if request.httprequest.method == 'POST':
-           
+            form_data = {}
             for key in post.keys():  # fields project.issue.description_1 .. nn
                 if re.match(".*_(\d+)",key):
                     (field_name,nr) = re.split('_',key,1)
@@ -68,14 +68,18 @@ class website_form(http.Controller):
             for key in form_data.keys():
                 if type(form_data[key]) is list:
                     form_data[key] = ', '.join(form_data[key])
-                            
-            form_data = dict((field_name, post.pop(form.model_id.name + '.' + field_name))  # fields project.issue.name
-                for field_name in request.env[form.model_id].fields_get().keys() if post.get(form.model_id.name + '.' + field_name))
-                
-            object = request.env[form.model_id].create(form_data)
+
+            form_data = dict((field_name, post.pop(form.model_id.model + '.' + field_name))  # fields project.issue.name
+                for field_name in request.env[form.model_id.model].fields_get().keys()
+                             if post.get(form.model_id.model + '.' + field_name))
+
+            form_so = {'sale.order': form_data}
+            _logger.warning("Form Data %s %s" % (form_so, post))
+            #object = request.env[form.model_id.model].create(form_data)
+            request.env['sale.order'].create({'note': u'bla...', 'date_order': u'2015-08-17', 'partner_id': 6})
             return werkzeug.utils.redirect(form.thanks_url)
-            
-        _logger.warning("This is form post %s %s" % (form,post))
+
+        _logger.warning("This is form post %s %s" % (form, post))
         return request.render('website_form.form', {'form': form})
 
 
@@ -94,13 +98,13 @@ class website_form(http.Controller):
             form.write(form_data)
 
 
-            
-           
+
+
         return request.render('website_form.edit', {'form': form})
 
 
 
-class form_form(models.Model):    
+class form_form(models.Model):
     _name = 'form.form'
     _description = 'Simple Form'
     _order = 'name'
@@ -111,5 +115,5 @@ class form_form(models.Model):
     thanks_template = fields.Char('Thanks template')
     auth_type = fields.Selection([('public','public'),('user','user'),('admin','admin')])
 
-    
+
 
