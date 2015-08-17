@@ -25,15 +25,15 @@
     'category': 'Sales',
     'summary': 'Forms for CRM and massmail ',
     'description': """
-Add simple forms to website.
-============================
+Add simple forms to website. (CRM)
+==================================
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['website_form','crm', 'mass_mailing'],
     'data': ['website_form.xml',
     ],
-    'application': True,
+    'application': False,
     'installable': True,
     'auto_install': False,
     

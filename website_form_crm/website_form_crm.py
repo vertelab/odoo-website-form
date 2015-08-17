@@ -39,6 +39,10 @@ class website_form_crm(http.Controller):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name','=', form)])
         if request.httprequest.method == 'POST':
+            # lead_id - kommer in
+            # -> konvertera till affärsmöjlighet
+            # -> fånga data som skall bli underlag för offert
+            
             form_data = {}
             for key in post.keys():  # fields project.issue.description_1 .. nn
                 if re.match(".*_(\d+)",key):
