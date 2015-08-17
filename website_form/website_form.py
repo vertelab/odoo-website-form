@@ -108,8 +108,8 @@ class form_form(models.Model):
     name = fields.Char('Name',required=True)
     model_id = fields.Many2one(comodel_name='ir.model',string='Model')
     body = fields.Html('Body',sanitize=False)
-    thanks_template = fields.char('Thanks template')
-    auth_type = fields.selection('Auth',[('public','public'),('user','user'),('admin','admin')])
+    thanks_template = fields.Char('Thanks template')
+    auth_type = fields.Selection([('public','public'),('user','user'),('admin','admin')])
 
     
 

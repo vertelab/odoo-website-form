@@ -32,7 +32,7 @@ Add simple forms to website.
     'depends': ['website',],
     'data': ['website_form.xml',
     ],
-
+    'application': True,
     'installable': True,
     
 }
