@@ -74,9 +74,9 @@ class website_form(http.Controller):
                              if post.get(form.model_id.model + '.' + field_name))
 
             form_so = {'sale.order': form_data}
-            _logger.warning("Form Data %s %s" % (form_so, post))
-            #object = request.env[form.model_id.model].create(form_data)
-            request.env['sale.order'].create({'note': u'bla...', 'date_order': u'2015-08-17', 'partner_id': 6})
+            _logger.warning("Form Data %s %s" % (form_data, post))
+            object = request.env[form.model_id.model].create(form_data)
+            _logger.warning("Form created object %s" % (object))
             return werkzeug.utils.redirect(form.thanks_url)
 
         _logger.warning("This is form post %s %s" % (form, post))
@@ -112,7 +112,7 @@ class form_form(models.Model):
     name = fields.Char('Name',required=True)
     model_id = fields.Many2one(comodel_name='ir.model',string='Model')
     body = fields.Html('Body',sanitize=False)
-    thanks_template = fields.Char('Thanks template')
+    thanks_url = fields.Char('Thanks Url', default="/page/website_form.thank_you")
     auth_type = fields.Selection([('public','public'),('user','user'),('admin','admin')])
 
 

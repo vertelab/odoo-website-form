@@ -21,18 +21,19 @@ $(document).ready(function() {
                         );
                     $pre.find('label').prepend(_t("Form Title:"));
                     $group.before($pre);
-                    var $add = $(
-                     '<div class="form-group ">'+
-                            '<label class="col-sm-3 control-label" for="thanks_template""/>'+
-                            '<div class="col-sm-9"><input type="text" id="thanks_template" name="thanks_template" value="website_form.thanks" /></div> '+
-                            + '</div>'
+                    var $add = $('<div class="form-group ">'+
+                            '<label class="col-sm-3 control-label" id="thanks" for="thanks_url"/>'+
+                            '<div class="col-sm-9"><input type="text" id="thanks_url" name="thanks_url" value="/page/website_form.thank_you" /></div> '+
+                            '</div>' +
                         '<div class="form-group mb0">'+
-                            '<label class="col-sm-offset-3 col-sm-9 text-left">'+
-                            '    <input type="checkbox" checked="checked" required="required"/> '+
-                            '</label>'+
+                            '<label class="col-sm-offset-3 col-sm-9 text-left" id="add_menu" >'+
+                            '    <input type="checkbox" checked="checked" required="required"/></label> '+
+
                         '</div>'
                         );
-                    $add.find('label').append(_t("Add page in menu"));
+                    $add.find('label[id="thanks"]').append(_t("Thanks Url: "));
+                    $add.find('label[id="add_menu"]').append(' ' + _t("Add page in menu"));
+
                     $group.after($add);
                     return website.session.model('ir.model')
                             .call('name_search', [], { context: website.get_context() });
