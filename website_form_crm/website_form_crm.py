@@ -35,13 +35,18 @@ class website_form_crm(http.Controller):
 
 
     @http.route(['/form/<string:form>/lead', ], type='http', auth="public", website=True)
-    def form_lead(self, form=False,**post):
+    def form_lead(self, form=False,lead_id=False,**post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name','=', form)])
+        if not form or not lead_id:
+            return request.render('website.page_404', {})        
+        
+        if lead_id:
+            lead = request.env['crm.lead'].search([('id','=', lead_id)])
+        else:
+            lead = False
+ 
         if request.httprequest.method == 'POST':
-            # lead_id - kommer in
-            # -> konvertera till affärsmöjlighet
-            # -> fånga data som skall bli underlag för offert
             
             form_data = {}
             for key in post.keys():  # fields project.issue.description_1 .. nn
@@ -59,14 +64,17 @@ class website_form_crm(http.Controller):
                 for field_name in request.env[form.model_id.model].fields_get().keys()
                              if post.get(form.model_id.model + '.' + field_name))
 
-            form_so = {'sale.order': form_data}
-            _logger.warning("Form Data %s %s" % (form_data, post))
-            object = request.env[form.model_id.model].create(form_data)
-            _logger.warning("Form created object %s" % (object))
+            if form_data.get('id',False):
+                lead = request.env[form.model_id.model].write(form_data.pop('id'),form_data)
+                l20 = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead.id,active_ids=[lead.id],active_model="crm.lead").action_apply()
+            else:    
+                lead = request.env[form.model_id.model].create(form_data)
+                
+            _logger.warning("Form created object %s" % (lead))
             return werkzeug.utils.redirect(form.thanks_url)
 
         _logger.warning("This is form post %s %s" % (form, post))
-        return request.render('website_form.form', {'form': form})
+        return request.render('website_form.form', {'form': form,'lead':lead or False})
 
 
 
