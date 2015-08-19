@@ -47,6 +47,10 @@ class website_form_crm(http.Controller):
             lead = False
  
         if request.httprequest.method == 'POST':
+
+            
+            lead_id = int(post.pop('crm.lead.id'))
+            _logger.warning("id: %s" % lead_id)
             
             form_data = {}
             for key in post.keys():  # fields project.issue.description_1 .. nn
@@ -64,15 +68,26 @@ class website_form_crm(http.Controller):
                 for field_name in request.env[form.model_id.model].fields_get().keys()
                              if post.get(form.model_id.model + '.' + field_name))
 
+            _logger.warning("Form Data %s %s" % (form_data, post))
+            
+            
             if form_data.get('id',False):
                 lead = request.env[form.model_id.model].write(form_data.pop('id'),form_data)
-                l20 = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead.id,active_ids=[lead.id],active_model="crm.lead").action_apply()
+                l2o = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead.id,active_ids=[lead.id],active_model="crm.lead").action_apply()
             else:    
                 lead = request.env[form.model_id.model].create(form_data)
                 
             _logger.warning("Form created object %s" % (lead))
+            #l2o = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead_id, active_model="crm.lead").create({
+            #    'name': 'convert',
+            #    'action': 'create',
+            #    #~ 'user_id': lead.user_id,
+            #    #~ 'section_id': lead.section_id,
+			#})
+            #l2o.with_context(active_id=lead_id,active_ids=[lead_id], active_model="crm.lead").action_apply()
+			
             return werkzeug.utils.redirect(form.thanks_url)
-
+        
         _logger.warning("This is form post %s %s" % (form, post))
         return request.render('website_form.form', {'form': form,'lead':lead or False})
 
