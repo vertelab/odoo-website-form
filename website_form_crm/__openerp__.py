@@ -31,7 +31,7 @@ Add simple forms to website. (CRM)
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['website_form','crm', 'mass_mailing'],
-    'data': ['website_form.xml',
+    'data': ['website_form_crm.xml',
     ],
     'application': False,
     'installable': True,

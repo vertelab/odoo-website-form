@@ -41,30 +41,44 @@ class website_form_crm(http.Controller):
         if request.httprequest.method == 'POST':
             # lead_id - kommer in
             # -> konvertera till affärsmöjlighet
-            # -> fånga data som skall bli underlag för offert
+            # -> fånga data som skall bli underlag för offert. spara i lead.description
             
-            form_data = {}
-            for key in post.keys():  # fields project.issue.description_1 .. nn
-                if re.match(".*_(\d+)",key):
-                    (field_name,nr) = re.split('_',key,1)
-                    if form_data.get(field_name):
-                        form_data[field_name].append(post.get(key))
-                    else:
-                        form_data[field_name] = [post.get(key)]
-            for key in form_data.keys():
-                if type(form_data[key]) is list:
-                    form_data[key] = ', '.join(form_data[key])
+            lead_id = int(post.pop('crm.lead.id'))
+            _logger.warning("id: %s" % lead_id)
+            
+            #~ form_data = {}
+            #~ for key in post.keys():  # fields project.issue.description_1 .. nn
+                #~ if re.match(".*_(\d+)",key):
+                    #~ (field_name,nr) = re.split('_',key,1)
+                    #~ if form_data.get(field_name):
+                        #~ form_data[field_name].append(post.get(key))
+                    #~ else:
+                        #~ form_data[field_name] = [post.get(key)]
+            #~ for key in form_data.keys():
+                #~ if type(form_data[key]) is list:
+                    #~ form_data[key] = ', '.join(form_data[key])
+#~ 
+            #~ form_data = dict((field_name, post.pop(form.model_id.model + '.' + field_name))  # fields project.issue.name
+                #~ for field_name in request.env[form.model_id.model].fields_get().keys()
+                             #~ if post.get(form.model_id.model + '.' + field_name))
+#~ 
+            #~ _logger.warning("Form Data %s %s" % (form_data, post))
+            #~ object = request.env[form.model_id.model].create(form_data)
+            #~ _logger.warning("Form created object %s" % (object))
+            
+            lead = request.env['crm.lead'].browse(lead_id)
+            lead.description = "Products"
 
-            form_data = dict((field_name, post.pop(form.model_id.model + '.' + field_name))  # fields project.issue.name
-                for field_name in request.env[form.model_id.model].fields_get().keys()
-                             if post.get(form.model_id.model + '.' + field_name))
-
-            form_so = {'sale.order': form_data}
-            _logger.warning("Form Data %s %s" % (form_data, post))
-            object = request.env[form.model_id.model].create(form_data)
-            _logger.warning("Form created object %s" % (object))
+            l2o = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead_id, active_model="crm.lead").create({
+                'name': 'convert',
+                'action': 'create',
+                #~ 'user_id': lead.user_id,
+                #~ 'section_id': lead.section_id,
+			})
+            l2o.with_context(active_id=lead_id,active_ids=[lead_id], active_model="crm.lead").action_apply()
+			
             return werkzeug.utils.redirect(form.thanks_url)
-
+        
         _logger.warning("This is form post %s %s" % (form, post))
         return request.render('website_form.form', {'form': form})
 
