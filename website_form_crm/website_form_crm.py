@@ -34,67 +34,70 @@ _logger = logging.getLogger(__name__)
 
 
 class website_form_crm(http.Controller):
-    @http.route(['/form/<string:form>/lead', ], type='http', auth="user", website=True)
-    def form_lead(self, form=False, lead_id=False, **post):
+    @http.route(['/form/<string:form>/lead/<model("crm.lead"):lead>', ], type='http', auth="user", website=True)
+    def form_lead(self, form=False, lead=False, **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name', '=', form)])
         if not form:
+            _logger.warning("not form ")
+            return request.render('website.page_404', {})
+            
+        if not lead:
+            _logger.warning("not lead ")
             return request.render('website.page_404', {})
 
-        if not lead_id:
-            return request.render('website.page_404', {})
-
-        if lead_id:
-            lead = request.env['crm.lead'].search([('id', '=', lead_id)])
-            if not lead:
-                return request.render('website.page_404', {})
-            _logger.warning("Lead_id search: name: %s lead_id: %s" % (lead.partner_name, lead_id))
-        else:
-            lead = False
+        _logger.warning("Lead_id search: name: %s" % (lead.partner_name))
 
         if request.httprequest.method == 'POST':
 
-            form_data = {}
+            serial_fields = {}
             for key in post.keys():  # fields project.issue.description_1 .. nn
                 if re.match(".*_(\d+)", key):
-                    (field_name, nr) = re.split('_', key, 1)
-                    if form_data.get(field_name):
-                        form_data[field_name].append(post.get(key))
+                    field_name = key.split('_')[0].split('.')[-1]
+                    _logger.warning("Lead_id split: fieldname: %s" % (field_name))
+                    if serial_fields.get(field_name):
+                        serial_fields[field_name].append(post.pop(key))
                     else:
-                        form_data[field_name] = [post.get(key)]
-            for key in form_data.keys():
-                if type(form_data[key]) is list:
-                    form_data[key] = ', '.join(form_data[key])
+                        serial_fields[field_name] = [post.pop(key)]
 
             form_data = dict((field_name, post.pop(form.model_id.model + '.' + field_name))  # fields project.issue.name
                              for field_name in request.env[form.model_id.model].fields_get().keys()
                              if post.get(form.model_id.model + '.' + field_name))
-
+            for key in serial_fields.keys():
+                if type(serial_fields[key]) is list:
+                    form_data[key] = ', '.join(serial_fields[key])
+            
             _logger.warning("Form Data %s %s" % (form_data, post))
+            
+            
+            
+            lead.write(form_data)
+            
+            return werkzeug.utils.redirect(form.thanks_url)
 
-            if form_data.get('id', False):
-                # form_data['type'] = 'opportunity'
-                # crm.stage_lead1
-                form_data['name'] = 'Canon 100D'
-                form_data['active'] = 1
-                form_data['type'] = 'opportunity'
-                # form_data['user_id'] = 1
-                # form_data['stage_id'] = 1
-                # form_data['section_id'] = 1
-                # form_data['company_id'] = 1
-                form_data['priority'] = '2'
-                # form_data['color'] = 0
-                form_data['partner_id'] = 7
 
-                # lead = request.env[form.model_id.model].write(form_data.pop('id'),form_data)
-                lead = request.env[form.model_id.model].browse(form_data.pop('id'))
-                _logger.warning("Form Data 2 %s %s" % (form_data, post))
-                lead.write(form_data)
-                # lead = request.env[form.model_id.model].create(form_data)
-                # lead.write({'partner_name': u'Christelle'})
-                # l2o = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead.id,active_ids=[lead.id],active_model="crm.lead").action_apply()
-            else:
-                lead = request.env[form.model_id.model].create(form_data)
+            
+
+            # form_data['type'] = 'opportunity'
+            # crm.stage_lead1
+            form_data['name'] = 'Canon 100D'
+            form_data['active'] = 1
+            form_data['type'] = 'opportunity'
+            # form_data['user_id'] = 1
+            # form_data['stage_id'] = 1
+            # form_data['section_id'] = 1
+            # form_data['company_id'] = 1
+            form_data['priority'] = '2'
+            # form_data['color'] = 0
+            form_data['partner_id'] = 7
+
+            # lead = request.env[form.model_id.model].write(form_data.pop('id'),form_data)
+            lead = request.env[form.model_id.model].browse(form_data.pop('id'))
+            _logger.warning("Form Data 2 %s %s" % (form_data, post))
+            lead.write(form_data)
+            # lead = request.env[form.model_id.model].create(form_data)
+            # lead.write({'partner_name': u'Christelle'})
+            # l2o = request.env['crm.lead2opportunity.partner'].with_context(active_id=lead.id,active_ids=[lead.id],active_model="crm.lead").action_apply()
 
 
             _logger.warning("Form created object %s" % (lead))
@@ -106,7 +109,6 @@ class website_form_crm(http.Controller):
             # })
             # l2o.with_context(active_id=lead_id,active_ids=[lead_id], active_model="crm.lead").action_apply()
 
-            return werkzeug.utils.redirect(form.thanks_url)
 
         _logger.warning("This is form post form: %s post: %s lead: %s name: %s" % (form, post, lead, lead.partner_name))
         return request.render('website_form_crm.lead_form', {'form': form, 'lead': lead})
