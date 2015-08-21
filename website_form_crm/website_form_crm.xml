@@ -17,7 +17,7 @@
                                     <div class="row" style="margin:auto; max-width: 850px;">
                                         <!-- Text input-->
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
-                                            <label class="control-label" for="partner_name">Namn</label>
+                                            <label class="control-label" for="partner_name">Företag</label>
                                             <div class="controls">
                                                 <input id="partner_name" name="crm.lead.partner_name" t-att-value="lead and lead.partner_name or ''" class="input-xlarge" required="True" type="text"/>
                                             </div>
@@ -58,11 +58,18 @@
                                                 <input id="mobile" name="crm.lead.mobile" t-att-value="lead and lead.mobile or ''" placeholder="0701234567" class="input-xlarge" type="text"/>
                                             </div>
                                         </div>
+                                        
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="description_06">Antal anställda</label>
+                                            <div class="controls">
+                                                <input id="description_06" name="crm.lead.description_06" placeholder="" class="input-xlarge" required="" type="text"/>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <!-- Multiple Checkboxes -->
                                     <div class="control-group mt32 mb32" style="margin:auto; padding-left:10%; max-width: 850px;">
-                                        <label class="control-label" for="description">Välj de tjänster som du är intresserad av</label>
+                                        <label class="control-label" for="description">Välj de tjänster som du är intresserad av: </label>
                                         <div class="controls" style="padding-left:3%;">
                                             <label class="checkbox" for="description_01">
                                                 <input name="crm.lead.description_01" id="description_01" value="Rekrytering / HR" type="checkbox"/>
@@ -87,16 +94,13 @@
                                         </div>
                                     </div>
                                     
+<!--
                                     <div class="row" style="margin:auto; max-width: 850px;">
-                                        <!-- Text input-->
-                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
-                                            <label class="control-label" for="description_06">Antal anställda</label>
-                                            <div class="controls">
-                                                <input id="description_06" name="crm.lead.description_06" placeholder="" class="input-xlarge" required="" type="text"/>
-                                            </div>
-                                        </div>
+-->
+                                       
 
                                         <!-- Text input-->
+<!--
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
                                             <label class="control-label" for="description_07">Antal adminstratörer</label>
                                             <div class="controls">
@@ -104,11 +108,12 @@
                                             </div>
                                         </div>
                                     </div>
+-->
                                     
                                     <!-- Textarea -->
                                     <div class="row" style="margin:auto; max-width: 850px; padding-left:10%;">
                                         <div class="control-group col-md-12 col-xs-12 mt32 mb32" style="padding-left: 0px;">
-                                            <label class="control-label" for="description_08">Tilläggsinformation</label>
+                                            <label class="control-label" for="description_08">Övrigt</label>
                                             <div class="controls">                     
                                                 <textarea id="description_08" rows="6" cols="70" name="crm.lead.description_08" style="width: 100%;"/>
                                             </div>
