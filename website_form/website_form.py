@@ -116,5 +116,29 @@ class form_form(models.Model):
     thanks_url = fields.Char('Thanks Url', default="/page/website_form.thank_you")
     auth_type = fields.Selection([('public','public'),('user','user'),('admin','admin')])
 
+    def form_eval(self,model,**post):
+        serial_fields = {}
+        for key in post.keys():  # fields project.issue.description_1 .. nn
+            if re.match(".*_(\d+)", key):
+                field_name = key.split('_')[0].split('.')[-1]  # crm.lead.description_01  -> description
+                if serial_fields.get(field_name):
+                    serial_fields[field_name].append(post.pop(key))
+                else:
+                    serial_fields[field_name] = [post.pop(key)]
+        form_data = dict((field_name, post.pop(model + '.' + field_name))  # fields project.issue.name -> { 'name': post.pop['value'] }
+                         for field_name in self.env[model].fields_get().keys()
+                         if post.get(model + '.' + field_name))
+        for key in serial_fields.keys():
+            if type(serial_fields[key]) is list:
+                form_data[key] = ', '.join(serial_fields[key])  # description_01, description_nn -> { 'description': 'value01, value02, valueNN' }    
+        return form_data
+        
+    def form_save(self,**post):
+        form_data = self.form_eval(self.model_id.model,post)
+        if form_data['id']:
+            object = self.search([('id','=',form_data.pop('id'))])
+            object.write(form_data)
+        else:
+            self.create(form_data)
 
 
