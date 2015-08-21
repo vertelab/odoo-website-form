@@ -80,7 +80,7 @@ class website_form_crm(http.Controller):
             form_data = form_eval(form.model_id.model,post)
             _logger.debug("Form Data %s %s" % (form_data, post))
             
-            partner = request.env['res.partner'].create({'is_company': True, 'name': form_data['partner_name'], 'email': form_data.get('email_from',''),  'phone': form_data.get('phone',''), 'ref': form_data.get('contact_name','') })
+            partner = request.env['res.partner'].create({'is_company': True, 'name': form_data['partner_name'], 'email': form_data.get('email_from',''),  'phone': form_data.get('phone',''), 'mobile':form_data.get('mobile',''), 'ref': form_data.get('contact_name','') })
             form_data['partner_id'] = partner.id
             form_data['type'] = 'opportunity'
             form_data['stage_id'] = request.env.ref('crm.stage_lead1').id
