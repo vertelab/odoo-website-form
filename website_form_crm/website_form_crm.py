@@ -34,13 +34,16 @@ _logger = logging.getLogger(__name__)
 
 
 class website_form_crm(http.Controller):
-    @http.route(['/form/<string:form>/lead/<model("crm.lead"):lead>', ], type='http', auth="user", website=True)
+    @http.route(['/form/<string:form>/lead/<model("crm.lead"):lead>', ], type='http', auth="public", website=True)
     def form_lead(self, form=False, lead=False, **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name', '=', form)])
+        
         if not form:
+            _logger.debug("Not Form 404")
             return request.render('website.page_404', {})            
         if not lead:
+            _logger.debug("Not Lead 404")
             return request.render('website.page_404', {})
 
         if request.httprequest.method == 'POST':
