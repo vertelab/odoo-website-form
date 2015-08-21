@@ -1,69 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-  <data>
-    <template id="lead_form">
-      <form class="form-horizontal" method="post">
-        <fieldset>
+    <data>
+        <template id="lead_form">
+            <t t-call="website.layout">
+                <section>
+                    <div class="container" style="max-width: 850px;">
+                        <div class="col-md-12" style="margin: auto; display: block; max-width: 850px;">
+                            <form class="form-horizontal" method="post">
+                                <fieldset>
+                                    <!-- Form Name -->
+                                    <h2 class="mt32 text-center"><strong>Effektivisera ditt företag</strong></h2>
+                                    <h4 class="mb32 text-center">affärssystemet som gör jobbet roligare</h4>
+                                    <div class="row" style="margin:auto; max-width: 850px;">
+                                        <img class="img-responsive col-md-6 col-xs-12 mb32" src="/website_form_crm/static/src/img/ir_attachment_607.png" style="width:100%; max-width:850px;"/>
+                                    </div>
+                                    <div class="row" style="margin:auto; max-width: 850px;">
+                                        <!-- Text input-->
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="partner_name">Namn</label>
+                                            <div class="controls">
+                                                <input id="partner_name" name="crm.lead.partner_name" t-att-value="lead and lead.partner_name or ''" class="input-xlarge" required="True" type="text"/>
+                                            </div>
+                                        </div>
 
-          <!-- Form Name -->
-          <legend>Form Name</legend>
-          <input name="crm.lead.id" t-att-value="lead and lead.id or ''" type="hidden"/>
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="crm.lead.partner_name">Namn</label>
-            <div class="col-md-4">
-              <!--<input id="crm.lead.partner_name" name="crm.lead.partner_name" placeholder="" class="form-control input-md" t-att-value="lead and lead.partner_name or ''" type="text"/>-->
-              <input id="crm.lead.partner_name" name="crm.lead.partner_name" placeholder="" class="form-control input-md" t-att-value="lead and lead.partner_name or 'Haojun'" type="text"/>
+                                        <!-- Text input-->
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="contact_name">Kontakt </label>
+                                            <div class="controls">
+                                                <input id="contact_name" name="crm.lead.contact_name" t-att-value="lead and lead.contact_name or '' " placeholder="Kalle Petterson" class="input-xlarge" type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row" style="margin:auto; max-width: 850px;">
+                                        <!-- Text input-->
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="email_from">E-post</label>
+                                            <div class="controls">
+                                                <input id="email_from" name="crm.lead.email_from" t-att-value="lead and lead.email_from or ''" placeholder="exempel@vertel.se" class="input-xlarge" type="text"/>
+                                            </div>
+                                        </div>
+                        
+                                        <!-- Text input-->
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="phone">Telefon</label>
+                                            <div class="controls">
+                                                <input id="phone" name="crm.lead.phone" t-att-value="lead and lead.phone or ''" placeholder="" class="input-xlarge" type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Text input-->
+                                    <div class="row" style="margin:auto; max-width: 850px;">
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="mobile">Mobil</label>
+                                            <div class="controls">
+                                                <input id="mobile" name="crm.lead.mobile" t-att-value="lead and lead.mobile or ''" placeholder="0701234567" class="input-xlarge" type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Multiple Checkboxes -->
+                                    <div class="control-group mt32 mb32" style="margin:auto; padding-left:10%; max-width: 850px;">
+                                        <label class="control-label" for="description">Välj de tjänster som du är intresserad av</label>
+                                        <div class="controls" style="padding-left:3%;">
+                                            <label class="checkbox" for="description_01">
+                                                <input name="crm.lead.description_01" id="description_01" value="Rekrytering / HR" type="checkbox"/>
+                                                Rekrytering / HR
+                                            </label>
+                                            <label class="checkbox" for="description_02">
+                                                <input name="crm.lead.description_02" id="description_02" value="Säljstöd / CRM" type="checkbox"/>
+                                                Säljstöd / CRM
+                                            </label>
+                                            <label class="checkbox" for="description_03">
+                                                <input name="crm.lead.description_03" id="description_03" value="Bokföring / fakturering" type="checkbox"/>
+                                                Bokföring / fakturering
+                                            </label>
+                                            <label class="checkbox" for="description_04">
+                                                <input name="crm.lead.description_04" id="description_04" value="Affär / bemaning" type="checkbox"/>
+                                                Affär / bemaning
+                                            </label>
+                                            <label class="checkbox" for="description_05">
+                                                <input name="crm.lead.description_05" id="description_05" value="Webbplats" type="checkbox"/>
+                                                Webbplats
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row" style="margin:auto; max-width: 850px;">
+                                        <!-- Text input-->
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="description_06">Antal anställda</label>
+                                            <div class="controls">
+                                                <input id="description_06" name="crm.lead.description_06" placeholder="" class="input-xlarge" required="" type="text"/>
+                                            </div>
+                                        </div>
 
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="crm.lead.contact_name">Kontakt</label>
-            <div class="col-md-4">
-              <input id="crm.lead.contact_name" name="crm.lead.contact_name" placeholder="Kalle Petterson" class="form-control input-md" t-att-value="lead and lead.contact_name or ''" type="text"/>
-
-              <span class="help-block">kontaktperson hos er</span>
-            </div>
-          </div>
-
-          <!-- Multiple Checkboxes -->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="crm.lead.description_01">Vi är intresserade av</label>
-            <div class="col-md-4">
-              <div class="checkbox">
-                <label for="desc_01-0">
-                  <input name="crm.lead.description_01" id="desc_01-0" value="hr" type="checkbox"/>
-                  HR
-                </label>
-              </div>
-              <div class="checkbox">
-                <label for="crm.lead.description_02">
-                  <input name="crm.lead.description_02" id="desc_01-1" value="accounting" type="checkbox"/>
-                  Bokföring
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Textarea -->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="textarea">Text Area</label>
-            <div class="col-md-4">
-              <textarea class="form-control" id="textarea" name="crm.lead.description_03">default text</textarea>
-
-              <!-- Button -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for=""/>
-                <div class="col-md-4">
-                  <button id="" name="" class="btn btn-primary">Skicka</button>
-                </div>
-              </div>
-
-            </div></div></fieldset>
-      </form>
-    </template>
-
-  </data>
+                                        <!-- Text input-->
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                            <label class="control-label" for="description_07">Antal adminstratörer</label>
+                                            <div class="controls">
+                                                <input id="description_07" name="crm.lead.description_07" placeholder="" class="input-xlarge" required="" type="text"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Textarea -->
+                                    <div class="row" style="margin:auto; max-width: 850px; padding-left:10%;">
+                                        <div class="control-group col-md-12 col-xs-12 mt32 mb32" style="padding-left: 0px;">
+                                            <label class="control-label" for="description_08">Tilläggsinformation</label>
+                                            <div class="controls">                     
+                                                <textarea id="description_08" rows="6" cols="70" name="crm.lead.description_08" style="width: 100%;"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Button -->
+                                    <div class="form-group mb32 text-center" style="margin:auto;">
+                                        <div class="col-md-12">
+                                            <button id="" name="" class="btn btn-primary btn-lg">Skicka</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </template>
+    </data>
 </openerp>
