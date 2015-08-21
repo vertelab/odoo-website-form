@@ -18,16 +18,16 @@
                                         <!-- Text input-->
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
                                             <label class="control-label" for="partner_name">Företag</label>
-                                            <div class="controls">
-                                                <input id="partner_name" name="crm.lead.partner_name" t-att-value="lead and lead.partner_name or ''" class="input-xlarge" required="True" type="text"/>
+                                            <div class="controls" style="width:100%;">
+                                                <input id="partner_name" name="crm.lead.partner_name" t-att-value="lead and lead.partner_name or lead.name" class="input-xlarge" required="True" type="text" style="width:100%;"/>
                                             </div>
                                         </div>
 
                                         <!-- Text input-->
-                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
+                                        <div class="control-group col-md-6 col-xs-12" style="padding-left:10%; width:">
                                             <label class="control-label" for="contact_name">Kontakt </label>
-                                            <div class="controls">
-                                                <input id="contact_name" name="crm.lead.contact_name" t-att-value="lead and lead.contact_name or '' " placeholder="Kalle Petterson" class="input-xlarge" type="text"/>
+                                            <div class="controls" style="width:100%;">
+                                                <input id="contact_name" name="crm.lead.contact_name" t-att-value="lead and lead.contact_name or '' " placeholder="Kalle Petterson" class="input-xlarge" type="text" style="width:100%;"/>
                                             </div>
                                         </div>
                                     </div>
@@ -36,16 +36,16 @@
                                         <!-- Text input-->
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
                                             <label class="control-label" for="email_from">E-post</label>
-                                            <div class="controls">
-                                                <input id="email_from" name="crm.lead.email_from" t-att-value="lead and lead.email_from or ''" placeholder="exempel@vertel.se" class="input-xlarge" type="text"/>
+                                            <div class="controls" style="width:100%;">
+                                                <input id="email_from" name="crm.lead.email_from" t-att-value="lead and lead.email_from or ''" placeholder="exempel@vertel.se" class="input-xlarge" type="text" style="width:100%;"/>
                                             </div>
                                         </div>
                         
                                         <!-- Text input-->
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
                                             <label class="control-label" for="phone">Telefon</label>
-                                            <div class="controls">
-                                                <input id="phone" name="crm.lead.phone" t-att-value="lead and lead.phone or ''" placeholder="" class="input-xlarge" type="text"/>
+                                            <div class="controls" style="width:100%;">
+                                                <input id="phone" name="crm.lead.phone" t-att-value="lead and lead.phone or ''" placeholder="" class="input-xlarge" type="text" style="width:100%;"/>
                                             </div>
                                         </div>
                                     </div>
@@ -54,15 +54,15 @@
                                     <div class="row" style="margin:auto; max-width: 850px;">
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
                                             <label class="control-label" for="mobile">Mobil</label>
-                                            <div class="controls">
-                                                <input id="mobile" name="crm.lead.mobile" t-att-value="lead and lead.mobile or ''" placeholder="0701234567" class="input-xlarge" type="text"/>
+                                            <div class="controls" style="width:100%;">
+                                                <input id="mobile" name="crm.lead.mobile" t-att-value="lead and lead.mobile or ''" placeholder="0701234567" class="input-xlarge" type="text" style="width:100%;"/>
                                             </div>
                                         </div>
                                         
                                         <div class="control-group col-md-6 col-xs-12" style="padding-left:10%;">
                                             <label class="control-label" for="description_06">Antal anställda</label>
-                                            <div class="controls">
-                                                <input id="description_06" name="crm.lead.description_06" placeholder="" class="input-xlarge" required="" type="text"/>
+                                            <div class="controls" style="width:100%;">
+                                                <input id="description_06" name="crm.lead.description_06" placeholder="" class="input-xlarge" required="" type="text" style="width:100%;"/>
                                             </div>
                                         </div>
                                     </div>
