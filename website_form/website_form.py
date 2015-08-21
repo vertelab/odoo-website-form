@@ -116,7 +116,7 @@ class form_form(models.Model):
     thanks_url = fields.Char('Thanks Url', default="/page/website_form.thank_you")
     auth_type = fields.Selection([('public','public'),('user','user'),('admin','admin')])
 
-    def form_eval(self,model,**post):
+    def form_eval(self,model,post):
         serial_fields = {}
         for key in post.keys():  # fields project.issue.description_1 .. nn
             if re.match(".*_(\d+)", key):

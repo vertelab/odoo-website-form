@@ -30,7 +30,9 @@ Add simple forms to website.
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
     'depends': ['website',],
-    'data': ['website_form.xml',
+    'data': [   'website_form.xml',
+                'security/ir.model.access.csv',
+                
     ],
     'application': True,
     'installable': True,
