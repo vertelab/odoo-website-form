@@ -45,6 +45,11 @@ class website_form_crm(http.Controller):
             _logger.info("Not Lead 404")
             return request.render('website.page_404', {})
 
+# self.pool['mail.mail.statistics'].set_replied(cr, uid, mail_message_ids=message_ids, context=context)
+# Sätt öppnade formulär i "replied" 
+# message_ids == self.pool['mail.mail.statistics'].search([('model','=','crm.lead'),('res_id','=',lead.id)]  
+
+
         if request.httprequest.method == 'POST':
             
             form_data = request.env['form.form'].form_eval(form.model_id.model,post)
