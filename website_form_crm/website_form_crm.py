@@ -58,5 +58,6 @@ class website_form_crm(http.Controller):
             
             return werkzeug.utils.redirect(form.thanks_url)
 
-        return request.render('website_form_crm.lead_form', {'form': form, 'lead': lead})
+        return request.render(form.template, {'form': form, 'lead': lead})
+
 

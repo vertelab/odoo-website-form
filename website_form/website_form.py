@@ -24,6 +24,7 @@ from openerp import http
 from openerp.http import request
 from openerp import SUPERUSER_ID
 from datetime import datetime
+from lxml import etree, html
 import werkzeug
 import pytz
 import re
@@ -31,13 +32,19 @@ import re
 import logging
 _logger = logging.getLogger(__name__)
 
+    
 class website_form(http.Controller):
 
-    @http.route(['/form/<string:form>/add', ], type='http', auth="user", website=True)
-    def form_add(self, form=False,model_id=False,add_menu=0, thanks_template='website_form.thanks',**post):
+    @http.route(['/form/<string:form_name>/add', ], type='http', auth="user", website=True)
+    def form_add(self, form_name=False,model_id=False,add_menu=0, thanks_template='website_form.thanks',**post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
-        form = request.env['form.form'].create({'name': form,'model_id': model_id,'body':'', 'thanks_template': thanks_template})
-        page = request.env['website'].new_page(form.name)
+        form = request.env['form.form'].create({
+                'name': form_name,
+                'model_id': model_id,
+                'template': request.env['website'].new_page(form_name), 
+                'thanks_template': thanks_template
+            })
+        
         _logger.warning("This is form postnr %s" % (form))
 
 
@@ -78,9 +85,9 @@ class website_form(http.Controller):
             object = request.env[form.model_id.model].create(form_data)
             _logger.warning("Form created object %s" % (object))
             return werkzeug.utils.redirect(form.thanks_url)
+            
 
-        _logger.warning("This is form post %s %s" % (form, post))
-        return request.render('website_form.form', {'form': form})
+        return request.render(form.template, {'form': form})
 
  
 
@@ -112,9 +119,9 @@ class form_form(models.Model):
 
     name = fields.Char('Name',required=True)
     model_id = fields.Many2one(comodel_name='ir.model',string='Model')
-    body = fields.Html('Body',sanitize=False)
     thanks_url = fields.Char('Thanks Url', default="/page/website_form.thank_you")
     auth_type = fields.Selection([('public','public'),('user','user'),('admin','admin')])
+    template = fields.Char('Template', required = True)
 
     def form_eval(self,model,post):
         serial_fields = {}
