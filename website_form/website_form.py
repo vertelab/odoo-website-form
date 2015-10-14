@@ -63,27 +63,8 @@ class website_form(http.Controller):
     def form_view(self, form=False,**post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name','=', form)])
-        if request.httprequest.method == 'POST':
-            form_data = {}
-            for key in post.keys():  # fields project.issue.description_1 .. nn
-                if re.match(".*_(\d+)",key):
-                    (field_name,nr) = re.split('_',key,1)
-                    if form_data.get(field_name):
-                        form_data[field_name].append(post.get(key))
-                    else:
-                        form_data[field_name] = [post.get(key)]
-            for key in form_data.keys():
-                if type(form_data[key]) is list:
-                    form_data[key] = ', '.join(form_data[key])
-
-            form_data = dict((field_name, post.pop(form.model_id.model + '.' + field_name))  # fields project.issue.name
-                for field_name in request.env[form.model_id.model].fields_get().keys()
-                             if post.get(form.model_id.model + '.' + field_name))
-
-            form_so = {'sale.order': form_data}
-            _logger.warning("Form Data %s %s" % (form_data, post))
-            object = request.env[form.model_id.model].create(form_data)
-            _logger.warning("Form created object %s" % (object))
+        if request.httprequest.method == 'POST':            
+            form.form_save(form.model_id.model,post)
             return werkzeug.utils.redirect(form.thanks_url)
             
 
@@ -102,12 +83,7 @@ class website_form(http.Controller):
 
             post_keys = list(key for key in post.keys())
             _logger.warning("This is form post %s" % (post_keys))
-
             form.write(form_data)
-
-
-
-
         return request.render('website_form.edit', {'form': form})
 
 
