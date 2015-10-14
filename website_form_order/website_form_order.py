@@ -49,15 +49,24 @@ class website_form_order(http.Controller):
 
         if request.httprequest.method == 'POST':
             
-            form_data = request.env['form.form'].form_eval(form.model_id.model,post)
-            _logger.debug("Form Data %s %s" % (form_data, post))
+            partner_data = request.env['form.form'].form_eval('res.partner',post)
+            raise Warning('partner_data %s' % partner_data)
+            sale_data    = request.env['form.form'].form_eval('sale.order',post)
+            line_data    = request.env['form.form'].form_eval('sale.order.line',post)
             
-            partner = request.env['res.partner'].sudo().create({'is_company': True, 'name': form_data['partner_name'], 'email': form_data.get('email_from',''),  'phone': form_data.get('phone',''), 'mobile':form_data.get('mobile',''), 'ref': form_data.get('contact_name','') })
-            form_data['partner_id'] = partner.id
-
-            order.sudo().write(form_data)
+            partner = request.env['res.partner'].search([('email','=',partner_data['email'])],limit=1)
+            if not partner:
+                partner = request.env['res.partner'].sudo().create(partner_data)
+            sale_data['partner_id'] = partner.id
+            order = request.env['sale.order'].sudo().create(sale_data)
+            line_data['order_id'] = order.id
+            line = request.env['sale.order.line'].sudo().create(line_data)
             
-            return werkzeug.utils.redirect(form.thanks_url)
+            
+            _logger.debug("Form Data %s %s" % (partner_data + sale_data + line_data, post))
+            
+            
+            return request.render('website_form_order.order_thanks',{'order':order})
 
         return request.render(form.template, {'form': form, 'order': order})
 
