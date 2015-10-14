@@ -33,8 +33,8 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class website_form_order(http.Controller):
-    @http.route(['/form/<string:form>/order/<model("sale.order"):order>', ], type='http', auth="public", website=True)
-    def form_lead(self, form=False, order=False, **post):
+    @http.route(['/form/<string:form>/order', ], type='http', auth="public", website=True)
+    def form_lead(self, form=False, **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
         form = request.env['form.form'].search([('name', '=', form)])
         
@@ -68,6 +68,7 @@ class website_form_order(http.Controller):
             
             return request.render('website_form_order.order_thanks',{'order':order})
 
-        return request.render(form.template, {'form': form, 'order': order})
+#        return request.render(form.template, {'form': form, 'order': order})
 
+        return request.render('website_form_order.order_form', {'form': form, })
 
