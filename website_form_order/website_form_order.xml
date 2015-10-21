@@ -3,6 +3,13 @@
   <data>
     <template id="order_form">
       <t t-call="website.layout">
+        <style>
+            .input-group-addon.info {
+                color: rgb(247, 59, 10);
+                background-color: rgb(15, 28, 38);
+                border-color: rgb(15, 28, 38);
+            }
+        </style>
         <section>
           <div class="container" style="max-width: 850px;">
             <div class="col-md-12" style="margin: auto; display: block; max-width: 850px;">
@@ -14,62 +21,92 @@
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.name">Företagsnamn</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="res.partner.street" name="res.partner.name" placeholder="" class="form-control input-md" required="True" type="text" />
+                        <span class="input-group-addon info">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                        </span> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.ref">Kontaktperson</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="res.partner.ref" name="res.partner.ref" placeholder="" class="form-control input-md" type="text" />
+                        <span class="input-group">
+                            <span class=""/>
+                        </span> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.street2">Leveransadress</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="sale.order.partner_shipping_id" name="res.partner.street2" placeholder="" class="form-control input-md" type="text" />
+                        <span class="input-group">
+                            <span class=""/>
+                        </span> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.street">Faktureringsadress</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="sale.order.partner_invoice_id" name="res.partner.street" placeholder="" class="form-control input-md" required="True" type="text" />
+                        <span class="input-group-addon info">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.phone">Telefonnummer</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="res.partner.phone" name="res.partner.phone" placeholder="" class="form-control input-md" type="text" required="True" />
+                        <span class="input-group-addon info">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.fax">Faxnummer</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="res.partner.fax" name="res.partner.fax" placeholder="" class="form-control input-md" type="text" />
+                        <span class="input-group">
+                            <span class=""/>
+                        </span> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="sale.order.client_order_ref">Ordernummer</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input id="sale.order.client_order_ref" name="sale.order.client_order_ref" placeholder="Ert eventuella ordernummer" class="form-control input-md" type="text" />
+                        <span class="input-group">
+                            <span class=""/>
+                        </span> 
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-md-4 control-label" for="res.partner.email">Epost*</label>
-                      <div class="col-md-4">
+                      <label class="col-md-4 control-label" for="res.partner.email">Epost</label>
+                      <div class="input-group col-md-4">
                         <input id="res.partner.email" name="res.partner.email" placeholder="" class="form-control input-md" required="True" type="text" />
+                        <span class="input-group-addon info">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="sale.order.line.name">Beställning</label>
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <textarea class="form-control" id="sale.order.line.name" name="sale.order.line.name" />
+                        <span class="input-group">
+                            <span class=""/>
+                        </span> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="singlebutton" />
-                      <div class="col-md-4">
+                      <div class="input-group col-md-4">
                         <input type="submit" name="Skicka" class="btn btn-primary" />
+                        <span class="input-group">
+                            <span class=""/>
+                        </span> 
                       </div>
                     </div>
                   </fieldset>
