@@ -103,7 +103,7 @@
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="singlebutton" />
                       <div class="input-group col-md-4">
-                        <input type="submit" name="Skicka" class="btn btn-primary" />
+                        <input type="submit" name="Skicka" value="Skicka" class="btn btn-primary" />
                         <span class="input-group">
                             <span class=""/>
                         </span> 
