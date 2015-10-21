@@ -69,7 +69,7 @@
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="singlebutton" />
                       <div class="col-md-4">
-                        <input type="button" name="Skicka" class="btn btn-primary" />
+                        <input type="submit" name="Skicka" class="btn btn-primary" />
                       </div>
                     </div>
                   </fieldset>

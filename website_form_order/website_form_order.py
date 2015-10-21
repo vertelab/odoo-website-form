@@ -32,6 +32,12 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+
+#  1) vid nyskapande av form satt menyvalet till /form/<string>/order
+#  2) template till website_form_order.order_form
+#  3) submit knapp
+#  4) markera obl falt
+
 class website_form_order(http.Controller):
     @http.route(['/form/<string:form>/order', ], type='http', auth="public", website=True)
     def form_lead(self, form=False, **post):
@@ -50,9 +56,9 @@ class website_form_order(http.Controller):
         if request.httprequest.method == 'POST':
             
             partner_data = request.env['form.form'].form_eval('res.partner',post)
-            raise Warning('partner_data %s' % partner_data)
             sale_data    = request.env['form.form'].form_eval('sale.order',post)
             line_data    = request.env['form.form'].form_eval('sale.order.line',post)
+            #raise Warning('line_data %s' % line_data)
             
             partner = request.env['res.partner'].search([('email','=',partner_data['email'])],limit=1)
             if not partner:
@@ -60,10 +66,12 @@ class website_form_order(http.Controller):
             sale_data['partner_id'] = partner.id
             order = request.env['sale.order'].sudo().create(sale_data)
             line_data['order_id'] = order.id
+            line_data['product_uom_qty'] = 1.0
+            line_data['price_unit'] = 1.0
             line = request.env['sale.order.line'].sudo().create(line_data)
             
             
-            _logger.debug("Form Data %s %s" % (partner_data + sale_data + line_data, post))
+            #_logger.debug("Form Data %s %s" % (partner_data + sale_data + line_data, post))
             
             
             return request.render('website_form_order.order_thanks',{'order':order})
