@@ -18,6 +18,7 @@
                   <fieldset>
                     <div class="col-md-12 mt48 mb64">
                       <h1 class="text-center" style="color:#F73B0A;">Beställa</h1>
+                      <h4 class="text-muted text-center">Fält markerade med * måste fyllas i.</h4>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="res.partner.name">Företagsnamn</label>
