@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0-20170514\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-22 15:32+0000\n"
-"PO-Revision-Date: 2017-05-22 17:35+0200\n"
+"PO-Revision-Date: 2017-05-22 17:43+0200\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr "Telefaxnummer"
 #. module: website_form_order
 #: view:website:website_form_order.order_form
 msgid "Fält markerade med * måste fyllas i."
-msgstr ""
+msgstr "Felder mit einem * müssen ausgefüllt werden."
 
 #. module: website_form_order
 #: view:website:website_form_order.order_form
@@ -86,6 +86,11 @@ msgstr "Vielen Dank für Ihre Bestellung"
 #: view:website:website_form_order.order_form
 msgid "Telefonnummer"
 msgstr "Telefonnummer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Skicka"
+msgstr "Senden"
 
 #. module: website_form_order
 #: view:website:website_form_order.order_thanks
