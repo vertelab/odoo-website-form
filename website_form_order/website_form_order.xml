@@ -26,7 +26,7 @@
                         <input id="res.partner.street" name="res.partner.name" placeholder="" class="form-control input-md" required="True" type="text" />
                         <span class="input-group-addon info">
                             <span class="glyphicon glyphicon-asterisk"></span>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -35,7 +35,7 @@
                         <input id="res.partner.ref" name="res.partner.ref" placeholder="" class="form-control input-md" type="text" />
                         <span class="input-group">
                             <span class=""/>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -44,7 +44,7 @@
                         <input id="sale.order.partner_shipping_id" name="res.partner.street2" placeholder="" class="form-control input-md" type="text" />
                         <span class="input-group">
                             <span class=""/>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -71,7 +71,7 @@
                         <input id="res.partner.fax" name="res.partner.fax" placeholder="" class="form-control input-md" type="text" />
                         <span class="input-group">
                             <span class=""/>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -80,7 +80,7 @@
                         <input id="sale.order.client_order_ref" name="sale.order.client_order_ref" placeholder="Ert eventuella ordernummer" class="form-control input-md" type="text" />
                         <span class="input-group">
                             <span class=""/>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
@@ -98,16 +98,16 @@
                         <textarea class="form-control" id="sale.order.line.name" name="sale.order.line.name" />
                         <span class="input-group">
                             <span class=""/>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="singlebutton" />
                       <div class="input-group col-md-4">
-                        <input type="submit" name="Skicka" value="Skicka" class="btn btn-primary" />
+                        <a type="submit" name="Skicka" value="Skicka" class="btn btn-primary" >Skicka</a>
                         <span class="input-group">
                             <span class=""/>
-                        </span> 
+                        </span>
                       </div>
                     </div>
                   </fieldset>
