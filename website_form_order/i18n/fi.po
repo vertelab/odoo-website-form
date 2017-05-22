@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_form_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20170514\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-22 15:25+0000\n"
+"PO-Revision-Date: 2017-05-22 17:31+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: fi\n"
+"X-Generator: Poedit 2.0.1\n"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Beställa"
+msgstr "Tilaukset"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Beställning"
+msgstr "Tilaus"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_thanks
+msgid "Ditt ordernummer"
+msgstr "Ditt ordernummer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Epost"
+msgstr "S-Postiosoite"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Ert eventuella ordernummer"
+msgstr "Mahdollinen tilausnumeronne"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Faktureringsadress"
+msgstr "Laskutusosoite"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Faxnummer"
+msgstr "Faksinumero"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Fält markerade med * måste fyllas i."
+msgstr ""
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Företagsnamn"
+msgstr "Yrityksen Nimi"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Kontaktperson"
+msgstr "Yhteyshenkilö"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Leveransadress"
+msgstr "Toimitusosoite"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Ordernummer"
+msgstr "Tilausnumero"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_thanks
+msgid "Tack för din order"
+msgstr "Kiitos tilauksestasi"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Telefonnummer"
+msgstr "Puhelinnumer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_thanks
+msgid "Vårt ordernummer"
+msgstr "Meidän tilausnumero"

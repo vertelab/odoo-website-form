@@ -1,0 +1,93 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_form_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20170514\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-22 15:32+0000\n"
+"PO-Revision-Date: 2017-05-22 17:35+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Poedit 2.0.1\n"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Beställa"
+msgstr "Bestellen"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Beställning"
+msgstr "Bestellung"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_thanks
+msgid "Ditt ordernummer"
+msgstr "Ihre Bestellnummer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Epost"
+msgstr "E-Mail-Anschrift"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Ert eventuella ordernummer"
+msgstr "Ihre mögliche Bestellnummer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Faktureringsadress"
+msgstr "Rechnunganschrift"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Faxnummer"
+msgstr "Telefaxnummer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Fält markerade med * måste fyllas i."
+msgstr ""
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Företagsnamn"
+msgstr "Ihr Firmenname"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Kontaktperson"
+msgstr "Ansprechpartner"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Leveransadress"
+msgstr "Lieferanschrift"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Ordernummer"
+msgstr "Bestellung"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_thanks
+msgid "Tack för din order"
+msgstr "Vielen Dank für Ihre Bestellung"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_form
+msgid "Telefonnummer"
+msgstr "Telefonnummer"
+
+#. module: website_form_order
+#: view:website:website_form_order.order_thanks
+msgid "Vårt ordernummer"
+msgstr "Unsere Auftragsnummer "
