@@ -29,6 +29,7 @@ Add simple forms to website. (Order)
 ==================================
 """,
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['website_form','sale'],
     'data': [   'website_form_order.xml',
